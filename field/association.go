@@ -239,13 +239,13 @@ func (c *RelateConfig) RelateFieldPrefix(relationshipType RelationshipType) stri
 }
 func (c *RelateConfig) GetTag(fieldName string) Tag {
 	if c == nil {
-		return Tag{}
+		return NewTag()
 	}
 	if c.OverwriteTag != nil {
 		return c.OverwriteTag
 	}
 	if c.Tag == nil {
-		c.Tag = Tag{}
+		c.Tag = NewTag()
 	}
 	if c.JSONTag == "" {
 		c.JSONTag = ns.ColumnName("", fieldName)

@@ -84,8 +84,7 @@ CREATE TABLE `users` (
   `company_id` bigint(20) unsigned DEFAULT '666',
   `private_url` varchar(255) DEFAULT 'https://a.b.c ',
   PRIMARY KEY (`id`),
-  KEY `idx_name` (`name`) USING BTREE,
-  KEY `idx_name_company_id` (`name`,`company_id`)
+  KEY `idx_name` (`name`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

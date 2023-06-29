@@ -77,8 +77,6 @@ func (b bank) TableName() string { return b.bankDo.TableName() }
 
 func (b bank) Alias() string { return b.bankDo.Alias() }
 
-func (b bank) Columns(cols ...field.Expr) gen.Columns { return b.bankDo.Columns(cols...) }
-
 func (b *bank) GetFieldByName(fieldName string) (field.OrderExpr, bool) {
 	_f, ok := b.fieldMap[fieldName]
 	if !ok || _f == nil {
@@ -211,6 +209,10 @@ func (b bankDo) Select(conds ...field.Expr) IBankDo {
 
 func (b bankDo) Where(conds ...gen.Condition) IBankDo {
 	return b.withDO(b.DO.Where(conds...))
+}
+
+func (b bankDo) Exists(subquery interface{ UnderlyingDB() *gorm.DB }) IBankDo {
+	return b.Where(field.CompareSubQuery(field.ExistsOp, nil, subquery.UnderlyingDB()))
 }
 
 func (b bankDo) Order(conds ...field.Expr) IBankDo {

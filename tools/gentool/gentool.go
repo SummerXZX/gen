@@ -28,6 +28,10 @@ const (
 	dbSQLServer  DBType = "sqlserver"
 	dbClickHouse DBType = "clickhouse"
 )
+const (
+	// DefaultOutPath default path
+	DefaultOutPath = "./dao/query"
+)
 
 // CmdParams is command line parameters
 type CmdParams struct {
@@ -129,8 +133,6 @@ func argParse() *CmdParams {
 	if *genPath != "" {
 		if configFileParams, err := loadConfigFile(*genPath); err == nil && configFileParams != nil {
 			cmdParse = *configFileParams
-		} else if err != nil {
-			log.Fatalf("loadConfigFile fail %s", err.Error())
 		}
 	}
 	// cmd first
@@ -146,7 +148,7 @@ func argParse() *CmdParams {
 	if *onlyModel {
 		cmdParse.OnlyModel = true
 	}
-	if *outPath != "" {
+	if *outPath != DefaultOutPath {
 		cmdParse.OutPath = *outPath
 	}
 	if *outFile != "" {

@@ -32,6 +32,12 @@ func NewField(table, column string, opts ...Option) Field {
 	return Field{expr: expr{col: toColumn(table, column, opts...)}}
 }
 
+func NewRaw(ex clause.Expr) Field {
+	return Field{expr: expr{
+		e: ex,
+	}}
+}
+
 // NewSerializer create new field2
 func NewSerializer(table, column string, opts ...Option) Serializer {
 	return Serializer{expr: expr{col: toColumn(table, column, opts...)}}
