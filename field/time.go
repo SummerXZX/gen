@@ -80,6 +80,10 @@ func (field Time) DateDiff(value time.Time) Int {
 	return Int{expr{e: clause.Expr{SQL: "DATEDIFF(?,?)", Vars: []interface{}{field.RawExpr(), value}}}}
 }
 
+func (field Time) DateDiffField(another Time) Int {
+	return Int{expr{e: clause.Expr{SQL: "DATEDIFF(?,?)", Vars: []interface{}{field.RawExpr(), another.RawExpr()}}}}
+}
+
 // DateFormat equal to DATE_FORMAT(self, value)
 func (field Time) DateFormat(value string) String {
 	return String{expr{e: clause.Expr{SQL: "DATE_FORMAT(?,?)", Vars: []interface{}{field.RawExpr(), value}}}}
